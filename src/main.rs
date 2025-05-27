@@ -1,12 +1,19 @@
-mod cli;
-mod analyzer;
-
-use analyzer::typos;
+use std::env;
 use std::path::Path;
 
-fn main() {
-    let args = cli::get_args();
-    let dir = Path::new(&args.path);
+mod analyzer;
 
-    typos::scan_for_typos(dir);
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+        eprintln!("Usage: {} <PATH>", args[0]);
+        std::process::exit(1);
+    }
+
+    let path = &args[1];
+    println!("Analyzing directory: {}", path);
+
+    if let Err(e) = analyzer::scan_project(Path::new(path)) {
+        eprintln!("Error scanning project: {}", e);
+    }
 }
