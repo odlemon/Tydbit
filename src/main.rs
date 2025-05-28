@@ -1,6 +1,7 @@
+mod analyzer;
+
 use std::env;
 use std::path::Path;
-mod analyzer;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -9,9 +10,10 @@ fn main() {
         std::process::exit(1);
     }
 
-    let path = Path::new(&args[1]);
+    let path = &args[1];
+    println!("Analyzing directory: {}", path);
 
-    if let Err(e) = analyzer::naming::analyze_naming(path) {
-        eprintln!("Naming analysis error: {}", e);
+    if let Err(e) = analyzer::naming::scan_naming(Path::new(path)) {
+        eprintln!("Error during naming scan: {}", e);
     }
 }
