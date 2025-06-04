@@ -1,0 +1,4 @@
+This is a sampel text file.
+It contains some obvius typos.
+The progrm should detect these misspellings.
+But it should not flag normal words like "the" and "contains". 

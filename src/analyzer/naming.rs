@@ -11,7 +11,7 @@ pub fn scan_naming(path: &Path) -> Result<(), Box<dyn std::error::Error>> {
             let entry = entry?;
             let path = entry.path();
             let name = entry.file_name().into_string().unwrap_or_default();
-
+            
             if !snake_case.is_match(&name) {
                 println!("Non-snake_case name: {}", path.display());
             }
